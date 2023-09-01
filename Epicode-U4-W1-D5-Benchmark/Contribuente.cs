@@ -72,8 +72,8 @@ namespace Epicode_U4_W1_D5_Benchmark
             Console.WriteLine($"Residente in {contribuente.ComuneResidenza}");
             Console.WriteLine($"Codice fiscale: {contribuente.CodiceFiscale}");
 
-            Console.WriteLine($"\nReddito dichiarato: {contribuente.RedditoAnnuale}");
-            Console.WriteLine($"Imposta da versare: {contribuente.Aliquota}");
+            Console.WriteLine($"\nReddito dichiarato: {string.Format("{0}$", contribuente.RedditoAnnuale)}"); //String.Format con {0:C} restituisce un punto interrogativo
+            Console.WriteLine($"Imposta da versare: {string.Format("{0}$",contribuente.Aliquota)}");
 
             Console.WriteLine("\n\nPremere un tasto per continuare...");
             Console.ReadLine();
@@ -147,11 +147,17 @@ namespace Epicode_U4_W1_D5_Benchmark
         }
         private static void getContribuenti()
         {
-            for(int i = 0; i < ContribuentiList.Count; i++) 
+            if(ContribuentiList.Count == 0)
             {
-                getImposta(ContribuentiList[i]);
-                Console.WriteLine();
+                Console.WriteLine("Nessun contribuente inserito. Premere enter per continuare.");
+                Console.ReadLine();
             }
+            else
+                for(int i = 0; i < ContribuentiList.Count; i++) 
+                {
+                    getImposta(ContribuentiList[i]);
+                    Console.WriteLine();
+                }
         }
         private static void chiudi()
         {
@@ -162,6 +168,5 @@ namespace Epicode_U4_W1_D5_Benchmark
         #endregion
 
         #endregion
-
     }
 }
